@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -19,7 +18,15 @@ export default function Navbar() {
   }, [])
 
   // Close on route change
-  useEffect(() => { setOpen(false) }, [pathname])
+const isFirstRender = useRef(true)
+
+useEffect(() => {
+  if (isFirstRender.current) {
+    isFirstRender.current = false
+    return
+  }
+  setOpen(false)
+}, [pathname])
 
   // Close on outside click
   useEffect(() => {

@@ -1,12 +1,21 @@
+/* eslint-disable react/no-unescaped-entities */
 import Link from 'next/link'
-import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { YOUR_NAME, WHATSAPP_LINK } from '@/lib/site'
+import type { Metadata } from 'next'
+import { AGENT_NAME, SITE_URL, SITE_NAME,WHATSAPP_LINK } from '@/lib/site'
+
 
 export const metadata: Metadata = {
   title: 'Services',
-  description: `What ${YOUR_NAME} offers — bespoke itinerary design, accommodation curation, local guide booking, and on-trip support across South Asia and East Africa.`,
+  description: `Bespoke itinerary planning, accommodation research and on-trip support. Everything handled personally by ${AGENT_NAME}.`,
+  openGraph: {
+    title: `Travel Planning Services — ${AGENT_NAME}`,
+    description: `Personal travel planning covering Rajasthan, Bali and Morocco. Handled by ${AGENT_NAME} from first message to last day.`,
+    url: `${SITE_URL}/services`,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
 }
 
 const SERVICES = [

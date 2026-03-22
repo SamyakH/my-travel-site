@@ -1,9 +1,8 @@
-// lib/site.ts
-// Sam's personal brand constants — single source of truth.
-// Every page imports from here. Never hardcode these in components.
-
 export const YOUR_NAME          = 'Sam J'
 export const YOUR_TITLE         = 'Boutique Travel Specialist'
+export const AGENT_NAME         = YOUR_NAME
+export const AGENT_TITLE        = YOUR_TITLE
+
 export const YOUR_TAGLINE       = 'I plan boutique trips across South Asia and East Africa for independent travelers.'
 export const YOUR_BIO_SHORT     = 'Based in London. Travelled independently across 40+ countries. Specialising in Rajasthan, Bali, and Morocco.'
 export const YOUR_BIO_LONG      = `I've spent the last decade exploring the routes most people miss — the guesthouses that don't appear on booking sites, the guides who actually live there, the timing that makes a place feel like yours alone.
@@ -23,7 +22,7 @@ export const TRIPS_PLANNED      = '300+'
 export const COUNTRIES_VISITED  = 42
 export const REPEAT_CLIENTS     = '65%'
 
-export const SITE_URL           = 'https://samjtravel.com'
+export const SITE_URL           = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://samjtravel.com'
 export const SITE_NAME          = 'Sam J Travel'
 export const COPYRIGHT_YEAR     = 2025
 

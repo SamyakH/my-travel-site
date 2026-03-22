@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -9,9 +10,18 @@ import {
   CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_LINK, WHATSAPP_LINK,
 } from '@/lib/site'
 
+import { AGENT_NAME, AGENT_TITLE, SITE_URL, SITE_NAME } from '@/lib/site'
+
 export const metadata: Metadata = {
-  title: 'About',
-  description: `Meet ${YOUR_NAME} — ${YOUR_TITLE}. ${YEARS_EXPERIENCE} years planning boutique trips across South Asia and East Africa.`,
+  title: `About ${AGENT_NAME}`,
+  description: `Meet ${AGENT_NAME} — ${AGENT_TITLE}. Years of firsthand experience planning boutique trips across Rajasthan, Bali and Morocco.`,
+  openGraph: {
+    title: `About ${AGENT_NAME}`,
+    description: `${AGENT_NAME} — ${AGENT_TITLE}. Personal travel planning with real local knowledge.`,
+    url: `${SITE_URL}/about`,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
 }
 
 const SPECIALISMS = [

@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -8,7 +7,6 @@ import {
   YOUR_NAME, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_LINK,
   WHATSAPP_LINK, RESPONSE_TIME,
 } from '@/lib/site'
-
 interface Form { name: string; email: string; phone: string; destination: string; timing: string }
 
 export default function ContactPage() {

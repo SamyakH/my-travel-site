@@ -1,11 +1,9 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
-
 interface Review {
   id: string; client_name: string; destination: string | null
   rating: number; comment: string; created_at: string | null

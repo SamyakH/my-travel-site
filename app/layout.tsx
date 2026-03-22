@@ -1,13 +1,14 @@
-import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import type { Metadata, Viewport } from 'next'
+import { AGENT_NAME, AGENT_TITLE, SITE_URL, SITE_NAME } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Sam J — Boutique Travel Specialist',
-    template: '%s | Sam J Travel',
+    default: `${AGENT_NAME} — ${AGENT_TITLE}`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    'I plan boutique trips across South Asia and East Africa for independent travelers. Rajasthan, Bali, Morocco — crafted with care, built around you.',
+  description: `Personal travel planning for Rajasthan, Bali and Morocco by ${AGENT_NAME}.`,
+  metadataBase: new URL(SITE_URL),
   keywords: [
     'boutique travel',
     'South Asia travel',
@@ -19,22 +20,20 @@ export const metadata: Metadata = {
     'travel specialist',
     'bespoke itinerary',
   ],
-  authors: [{ name: 'Sam J' }],
-  creator: 'Sam J',
+  authors: [{ name: AGENT_NAME }],
+  creator: AGENT_NAME,
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Sam J — Boutique Travel Specialist',
-    description:
-      'I plan boutique trips across South Asia and East Africa for independent travelers.',
-    siteName: 'Sam J Travel',
+    siteName: SITE_NAME,
+    title: `${AGENT_NAME} — ${AGENT_TITLE}`,
+    description: `Personal travel planning for Rajasthan, Bali and Morocco by ${AGENT_NAME}.`,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sam J — Boutique Travel Specialist',
-    description:
-      'Boutique trips across South Asia and East Africa, crafted for independent travelers.',
+    title: `${AGENT_NAME} — ${AGENT_TITLE}`,
+    description: `Boutique trips across South Asia and East Africa, crafted for independent travellers.`,
   },
 }
 
@@ -51,11 +50,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    /*
-      Font is loaded via @import in globals.css and applied via
-      var(--font-body) on body. No 'font-sans' Tailwind class here
-      — that would override our custom font stack.
-    */
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         {children}

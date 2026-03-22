@@ -1,9 +1,24 @@
+/* eslint-disable react/no-unescaped-entities */
 import Link from 'next/link'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+
+import type { Metadata } from 'next'
+import { AGENT_NAME, AGENT_TITLE, SITE_URL, SITE_NAME } from '@/lib/site'
+
+export const metadata: Metadata = {
+  title: `${AGENT_NAME} — ${AGENT_TITLE}`,
+  description: `Personal travel planning for Rajasthan, Bali and Morocco. Deep local knowledge, no generic itineraries. Plan your trip with ${AGENT_NAME}.`,
+  openGraph: {
+    title: `${AGENT_NAME} — ${AGENT_TITLE}`,
+    description: `Personal travel planning for Rajasthan, Bali and Morocco.`,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    type: 'website',
+  },
+}
 import {
-  YOUR_NAME,
   YOUR_TAGLINE,
   YEARS_EXPERIENCE,
   TRIPS_PLANNED,

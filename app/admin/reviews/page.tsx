@@ -1,5 +1,4 @@
-'use client'
-
+'use client' 
 import { useEffect, useState } from 'react'
 import AdminShell from '@/components/AdminShell'
 import { useAdminGuard } from '@/lib/useAdminGuard'
