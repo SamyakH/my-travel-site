@@ -143,7 +143,7 @@ export default function HomePage() {
                     <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
                   </svg>
                 </Link>
-                <Link href="/packages" className="btn btn-outline btn-lg" style={{ color: 'rgba(255,255,255,0.85)', borderColor: 'rgba(7, 7, 7, 0.3)' }}>
+                <Link href="/packages" className="btn btn-outline btn-lg" style={{ color: 'rgba(255,255,255,0.85)', borderColor: 'rgba(255,255,255,0.30)' }}>
                   View journeys
                 </Link>
               </div>
