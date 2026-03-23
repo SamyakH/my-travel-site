@@ -14,7 +14,103 @@ interface Package {
   itinerary: ItineraryDay[] | null
 }
 interface FormState { name: string; email: string; phone: string; message: string }
+function PackageReviews({ packageId, packageTitle }: { packageId: string; packageTitle: string }) {
+  const [reviews, setReviews] = useState<Array<{
+    id: string; client_name: string; rating: number
+    comment: string; created_at: string | null
+  }>>([])
+  const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    supabase
+      .from('reviews')
+      .select('id,client_name,rating,comment,created_at')
+      .eq('package_id', packageId)
+      .eq('is_approved', true)
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        setReviews(data ?? [])
+        setLoading(false)
+      })
+  }, [packageId])
+
+  const avg = reviews.length
+    ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
+    : null
+
+  return (
+    <div className="pkg-reviews-section">
+      <div className="pkg-reviews-header">
+        <h2 className="t-h4">
+          What travellers say about this trip
+        </h2>
+        {avg && (
+          <div className="pkg-reviews-avg">
+            <span className="pkg-avg-number">{avg}</span>
+            <span className="pkg-avg-stars">
+              {'★'.repeat(Math.round(parseFloat(avg)))}
+              {'☆'.repeat(5 - Math.round(parseFloat(avg)))}
+            </span>
+            <span className="pkg-avg-count">
+              {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {loading && (
+        <div className="flex-center" style={{ padding: 'var(--sp-8)' }}>
+          <div className="loading-spinner" />
+        </div>
+      )}
+
+      {!loading && reviews.length === 0 && (
+        <div className="pkg-reviews-empty">
+          <p className="t-body">No reviews yet for this journey.</p>
+          <p className="t-small mt-2">
+            Been on this trip?{' '}
+            <Link
+              href={`/reviews/submit?package=${packageId}&title=${encodeURIComponent(packageTitle)}`}
+              className="btn-link"
+            >
+              Be the first to leave a review →
+            </Link>
+          </p>
+        </div>
+      )}
+
+      {!loading && reviews.length > 0 && (
+        <>
+          <div className="pkg-reviews-grid">
+            {reviews.map(r => (
+              <article key={r.id} className="review-card">
+                <span className="review-quote-mark">&ldquo;</span>
+                <div className="stars" aria-label={`${r.rating} out of 5 stars`}>
+                  {'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}
+                </div>
+                <p className="review-text mt-4">{r.comment}</p>
+                <div className="review-author">
+                  <div className="review-avatar" aria-hidden="true">
+                    {r.client_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
+                  </div>
+                  <div className="review-name">{r.client_name}</div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div style={{ marginTop: 'var(--sp-6)' }}>
+            <Link
+              href={`/reviews/submit?package=${packageId}&title=${encodeURIComponent(packageTitle)}`}
+              className="btn btn-outline-clay btn-md"
+            >
+              Leave a review for this trip
+            </Link>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
 export default function PackageClient() {
   const params                          = useParams()
   const [pkg, setPkg]                   = useState<Package | null>(null)
@@ -224,6 +320,7 @@ export default function PackageClient() {
         </section>
       </main>
       <footer className="layout-footer"><Footer /></footer>
+      <PackageReviews packageId={params.id as string} packageTitle={pkg.title} />
     </div>
   )
 }

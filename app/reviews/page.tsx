@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
+
 interface Review {
   id: string; client_name: string; destination: string | null
   rating: number; comment: string; created_at: string | null
@@ -58,6 +59,11 @@ export default function ReviewsPage() {
             <p className="t-lead mt-5" style={{ maxWidth: '48ch' }}>
               Real trips. Real feedback. Approved and published without editing.
             </p>
+            <div className="flex-row gap-3 mt-6">
+              <Link href="/reviews/submit" className="btn btn-primary btn-md">
+                Leave a review
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -70,7 +76,9 @@ export default function ReviewsPage() {
                 <div className="reviews-avg">{avg}</div>
                 <div>
                   <Stars n={Math.round(parseFloat(avg))} />
-                  <p className="t-small mt-2">{reviews.length} verified {reviews.length === 1 ? 'review' : 'reviews'}</p>
+                  <p className="t-small mt-2">
+                    {reviews.length} verified {reviews.length === 1 ? 'review' : 'reviews'}
+                  </p>
                 </div>
               </div>
             )}
@@ -85,7 +93,13 @@ export default function ReviewsPage() {
             {/* No reviews */}
             {!loading && reviews.length === 0 && (
               <div className="card-flat text-center" style={{ padding: 'var(--sp-16)' }}>
-                <p className="t-lead">Reviews coming soon.</p>
+                <p className="t-lead">No reviews yet.</p>
+                <p className="t-body mt-3" style={{ color: 'var(--ink-2)' }}>
+                  Be the first to share your experience.
+                </p>
+                <Link href="/reviews/submit" className="btn btn-primary btn-md" style={{ marginTop: '1.5rem', display: 'inline-block' }}>
+                  Leave a review
+                </Link>
               </div>
             )}
 
@@ -125,7 +139,14 @@ export default function ReviewsPage() {
         <section className="section-sm section-alt">
           <div className="container-sm text-center">
             <h2 className="t-h3">Ready to plan yours?</h2>
-            <Link href="/contact" className="btn btn-primary btn-lg mt-6">Get in touch</Link>
+            <div className="flex-row gap-3 mt-6" style={{ justifyContent: 'center' }}>
+              <Link href="/contact" className="btn btn-primary btn-lg">
+                Get in touch
+              </Link>
+              <Link href="/reviews/submit" className="btn btn-secondary btn-lg">
+                Leave a review
+              </Link>
+            </div>
           </div>
         </section>
 

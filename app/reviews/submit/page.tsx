@@ -4,7 +4,7 @@ import SubmitClient from './SubmitClient'
 
 export const metadata: Metadata = {
   title: 'Leave a Review',
-  description: `Travelled with ${AGENT_NAME}? Share your experience and help other travellers.`,
+  description: `Travelled with ${AGENT_NAME}? Share your experience.`,
   robots: { index: false },
 }
 

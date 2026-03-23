@@ -1758,87 +1758,189 @@ input, textarea, select { font-family: var(--font-body); }
   gap: 0.5rem;
 }
 
-/* Review submit page */
+/* ── REVIEW SUBMIT PAGE ─────────────────────────────────────────── */
 .submit-review-page {
-  min-height: 70vh;
+  min-height: calc(100vh - 4.5rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1rem;
-  background: var(--cream);
+  padding: var(--sp-16) var(--sp-4);
+  background: var(--page-2);
 }
 
 .submit-review-card {
-  background: white;
-  border-radius: 1rem;
-  padding: 2.5rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: clamp(var(--sp-8), 5vw, var(--sp-12));
   width: 100%;
-  max-width: 560px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  max-width: 580px;
+  box-shadow: var(--sh-md);
 }
 
 .submit-review-card h1 {
   font-family: var(--font-display);
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: var(--text-4xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: var(--sp-3);
 }
 
 .submit-review-card > p {
-  color: var(--ink-light);
-  margin-bottom: 2rem;
+  font-size: var(--text-base);
+  color: var(--ink-3);
+  line-height: 1.65;
+  margin-bottom: var(--sp-8);
 }
 
 .submit-review-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--sp-5);
 }
 
+/* Use the same field classes as the rest of the site */
+.submit-review-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.submit-review-form .form-group label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink-2);
+  letter-spacing: 0.01em;
+}
+
+.submit-review-form .form-group input,
+.submit-review-form .form-group textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--border-2);
+  border-radius: var(--r-md);
+  padding: 0.8125rem 1rem;
+  min-height: 3rem;
+  transition: border-color var(--tf), box-shadow var(--tf);
+}
+
+.submit-review-form .form-group textarea {
+  min-height: 8rem;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+.submit-review-form .form-group input::placeholder,
+.submit-review-form .form-group textarea::placeholder {
+  color: var(--ink-4);
+}
+
+.submit-review-form .form-group input:focus,
+.submit-review-form .form-group textarea:focus {
+  outline: none;
+  border-color: var(--clay);
+  box-shadow: 0 0 0 3px rgba(196, 98, 45, 0.12);
+}
+
+/* Star rating */
 .star-rating-input {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--sp-1);
+  flex-wrap: wrap;
 }
 
 .star-btn {
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 2.25rem;
   cursor: pointer;
-  color: #d1d5db;
-  transition: color 0.15s;
+  color: var(--page-3);
+  transition: color var(--tf), transform var(--tp);
   padding: 0;
   line-height: 1;
 }
 
-.star-btn.active { color: var(--clay); }
+.star-btn:hover {
+  transform: scale(1.15);
+}
+
+.star-btn.active {
+  color: #e8a020;
+}
 
 .rating-label {
-  margin-left: 0.75rem;
-  font-size: 0.9rem;
-  color: var(--ink-light);
+  margin-left: var(--sp-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink-3);
+  min-width: 6rem;
+}
+
+/* Error state */
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* Success state */
+.submit-success {
+  text-align: center;
+  padding: var(--sp-12) var(--sp-8);
 }
 
 .submit-success-icon {
-  width: 4rem;
-  height: 4rem;
-  background: #f0fdf4;
-  color: #16a34a;
+  width: 4.5rem;
+  height: 4.5rem;
+  background: #e6f4ea;
+  color: #2d7a3a;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
-  margin-bottom: 1.5rem;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin: 0 auto var(--sp-6);
+  border: 2px solid #bbf7d0;
 }
 
-.form-error {
-  background: #fef2f2;
-  color: #dc2626;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+.submit-success h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  color: var(--ink);
+  margin-bottom: var(--sp-3);
+}
+
+.submit-success p {
+  font-size: var(--text-base);
+  color: var(--ink-3);
+  max-width: 34ch;
+  margin: 0 auto var(--sp-8);
+  line-height: 1.65;
+}
+
+@media (max-width: 639px) {
+  .submit-review-card {
+    border-radius: var(--r-lg);
+    padding: var(--sp-6);
+  }
+
+  .star-btn {
+    font-size: 2rem;
+  }
 }
 /* Package admin */
 .admin-packages-list {
