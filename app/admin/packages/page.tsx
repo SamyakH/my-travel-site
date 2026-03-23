@@ -1,4 +1,4 @@
-'use client' 
+'use client'
 import { useEffect, useState } from 'react'
 import AdminShell from '@/components/AdminShell'
 import { useAdminGuard } from '@/lib/useAdminGuard'
@@ -17,25 +17,41 @@ interface Package {
   is_active: boolean
 }
 
+interface Category {
+  id: string
+  name: string
+  slug: string
+}
+
 const EMPTY = {
   title: '', tagline: '', price: '', duration: '',
-  description: '', image_url: '', category: 'Adventure'
+  description: '', image_url: '', category: ''
 }
 
 export default function Packages() {
   const ready = useAdminGuard()
-  const [packages, setPackages] = useState<Package[]>([])
-  const [form, setForm] = useState(EMPTY)
+  const [packages, setPackages]   = useState<Package[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
+  const [form, setForm]           = useState(EMPTY)
   const [editingId, setEditingId] = useState<string | null>(null)
-  const [saving, setSaving] = useState(false)
-  const [msg, setMsg] = useState('')
-  const [msgType, setMsgType] = useState<'success' | 'error'>('success')
+  const [saving, setSaving]       = useState(false)
+  const [msg, setMsg]             = useState('')
+  const [msgType, setMsgType]     = useState<'success' | 'error'>('success')
 
   useEffect(() => {
     if (!ready) return
     adminFetch('/api/admin/packages')
       .then(r => r.json())
       .then(setPackages)
+    adminFetch('/api/admin/categories')
+      .then(r => r.json())
+      .then((cats: Category[]) => {
+        const filtered = cats.filter(c => c.slug !== 'all')
+        setCategories(filtered)
+        if (filtered.length > 0) {
+          setForm(f => ({ ...f, category: filtered[0].name }))
+        }
+      })
   }, [ready])
 
   const showMsg = (text: string, type: 'success' | 'error' = 'success') => {
@@ -47,26 +63,25 @@ export default function Packages() {
   const startEdit = (pkg: Package) => {
     setEditingId(pkg.id)
     setForm({
-      title: pkg.title,
-      tagline: pkg.tagline,
-      price: String(pkg.price),
-      duration: pkg.duration,
+      title:       pkg.title,
+      tagline:     pkg.tagline,
+      price:       String(pkg.price),
+      duration:    pkg.duration,
       description: pkg.description,
-      image_url: pkg.image_url,
-      category: pkg.category,
+      image_url:   pkg.image_url,
+      category:    pkg.category,
     })
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const cancelEdit = () => {
     setEditingId(null)
-    setForm(EMPTY)
+    setForm({ ...EMPTY, category: categories[0]?.name ?? '' })
   }
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
-
     const payload = { ...form, price: parseFloat(form.price) }
 
     if (editingId) {
@@ -75,9 +90,7 @@ export default function Packages() {
         body: JSON.stringify(payload),
       })
       if (res.ok) {
-        setPackages(prev => prev.map(p =>
-          p.id === editingId ? { ...p, ...payload } : p
-        ))
+        setPackages(prev => prev.map(p => p.id === editingId ? { ...p, ...payload } : p))
         showMsg('Package updated.')
         cancelEdit()
       } else {
@@ -91,13 +104,12 @@ export default function Packages() {
       if (res.ok) {
         const newPkg = await res.json()
         setPackages(prev => [newPkg, ...prev])
-        setForm(EMPTY)
+        setForm({ ...EMPTY, category: categories[0]?.name ?? '' })
         showMsg('Package added.')
       } else {
         showMsg('Error saving package.', 'error')
       }
     }
-
     setSaving(false)
   }
 
@@ -106,9 +118,7 @@ export default function Packages() {
       method: 'PATCH',
       body: JSON.stringify({ is_active: active }),
     })
-    setPackages(prev => prev.map(p =>
-      p.id === id ? { ...p, is_active: active } : p
-    ))
+    setPackages(prev => prev.map(p => p.id === id ? { ...p, is_active: active } : p))
   }
 
   const deletePackage = async (id: string) => {
@@ -183,11 +193,9 @@ export default function Packages() {
                   value={form.category}
                   onChange={e => setForm({...form, category: e.target.value})}
                 >
-                  <option>Adventure</option>
-                  <option>Cultural</option>
-                  <option>Honeymoon</option>
-                  <option>Wildlife</option>
-                  <option>Beach</option>
+                  {categories.map(cat => (
+                    <option key={cat.id} value={cat.name}>{cat.name}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -211,16 +219,23 @@ export default function Packages() {
                 placeholder="https://images.unsplash.com/…"
               />
               {form.image_url && (
-                <img src={form.image_url} alt="Preview" className="admin-image-preview" />
+                <Image
+                  src={form.image_url}
+                  alt="Preview"
+                  width={320}
+                  height={180}
+                  className="admin-image-preview"
+                  unoptimized
+                />
               )}
             </div>
 
             <div className="admin-form-actions">
-              <button type="submit" className="btn-primary" disabled={saving}>
+              <button type="submit" className="btn btn-primary btn-md" disabled={saving}>
                 {saving ? 'Saving…' : editingId ? 'Save changes' : 'Add package'}
               </button>
               {editingId && (
-                <button type="button" onClick={cancelEdit} className="btn-secondary">
+                <button type="button" onClick={cancelEdit} className="btn btn-outline btn-md">
                   Cancel
                 </button>
               )}
@@ -240,7 +255,14 @@ export default function Packages() {
             <div key={pkg.id} className={`admin-package-card${!pkg.is_active ? ' inactive' : ''}`}>
               {pkg.image_url && (
                 <div className="admin-package-img">
-                  <Image src={pkg.image_url} alt={pkg.title} width={120} height={120} style={{objectFit:'cover',height:'100%'}} unoptimized />
+                  <Image
+                    src={pkg.image_url}
+                    alt={pkg.title}
+                    width={120}
+                    height={120}
+                    style={{ objectFit: 'cover', height: '100%' }}
+                    unoptimized
+                  />
                 </div>
               )}
               <div className="admin-package-body">
@@ -257,16 +279,10 @@ export default function Packages() {
                   </span>
                 </div>
                 <div className="admin-package-actions">
-                  <button
-                    onClick={() => startEdit(pkg)}
-                    className="btn-secondary"
-                  >
+                  <button onClick={() => startEdit(pkg)} className="btn btn-outline btn-sm">
                     Edit
                   </button>
-                  <button
-                    onClick={() => toggleActive(pkg.id, !pkg.is_active)}
-                    className="btn-secondary"
-                  >
+                  <button onClick={() => toggleActive(pkg.id, !pkg.is_active)} className="btn btn-outline btn-sm">
                     {pkg.is_active ? 'Hide' : 'Make live'}
                   </button>
                   <button

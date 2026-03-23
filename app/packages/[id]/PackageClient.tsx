@@ -14,6 +14,7 @@ interface Package {
   itinerary: ItineraryDay[] | null
 }
 interface FormState { name: string; email: string; phone: string; message: string }
+
 function PackageReviews({ packageId, packageTitle }: { packageId: string; packageTitle: string }) {
   const [reviews, setReviews] = useState<Array<{
     id: string; client_name: string; rating: number
@@ -41,9 +42,7 @@ function PackageReviews({ packageId, packageTitle }: { packageId: string; packag
   return (
     <div className="pkg-reviews-section">
       <div className="pkg-reviews-header">
-        <h2 className="t-h4">
-          What travellers say about this trip
-        </h2>
+        <h2 className="t-h4">What travellers say about this trip</h2>
         {avg && (
           <div className="pkg-reviews-avg">
             <span className="pkg-avg-number">{avg}</span>
@@ -91,7 +90,7 @@ function PackageReviews({ packageId, packageTitle }: { packageId: string; packag
                 <p className="review-text mt-4">{r.comment}</p>
                 <div className="review-author">
                   <div className="review-avatar" aria-hidden="true">
-                    {r.client_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
+                    {r.client_name.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2)}
                   </div>
                   <div className="review-name">{r.client_name}</div>
                 </div>
@@ -111,16 +110,17 @@ function PackageReviews({ packageId, packageTitle }: { packageId: string; packag
     </div>
   )
 }
+
 export default function PackageClient() {
-  const params                          = useParams()
-  const [pkg, setPkg]                   = useState<Package | null>(null)
-  const [loading, setLoading]           = useState(true)
-  const [expanded, setExpanded]         = useState<number | null>(null)
-  const [form, setForm]                 = useState<FormState>({ name: '', email: '', phone: '', message: '' })
-  const [submitting, setSubmitting]     = useState(false)
-  const [submitted, setSubmitted]       = useState(false)
-  const [error, setError]               = useState('')
-  const [csrfToken, setCsrfToken]       = useState('')
+  const params                      = useParams()
+  const [pkg, setPkg]               = useState<Package | null>(null)
+  const [loading, setLoading]       = useState(true)
+  const [expanded, setExpanded]     = useState<number | null>(null)
+  const [form, setForm]             = useState<FormState>({ name: '', email: '', phone: '', message: '' })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted]   = useState(false)
+  const [error, setError]           = useState('')
+  const [csrfToken, setCsrfToken]   = useState('')
 
   useEffect(() => {
     if (!params.id) return
@@ -138,8 +138,8 @@ export default function PackageClient() {
 
   useEffect(() => {
     fetch('/api/csrf-token')
-      .then((r) => r.json())
-      .then((d) => setCsrfToken(d.token))
+      .then(r => r.json())
+      .then(d => setCsrfToken(d.token))
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -198,6 +198,8 @@ export default function PackageClient() {
     <div className="page-wrap">
       <header className="layout-header"><Navbar /></header>
       <main className="layout-main">
+
+        {/* ── HERO ── */}
         <section className="hero hero-sm">
           <div className="hero-bg">
             <Image src={pkg.image_url} alt={pkg.title} fill priority sizes="100vw" style={{ objectFit: 'cover' }} />
@@ -228,12 +230,17 @@ export default function PackageClient() {
           </div>
         </section>
 
+        {/* ── DETAIL + INQUIRY ── */}
         <section className="section">
           <div className="container">
             <div className="pkg-detail-grid">
+
+              {/* ── LEFT COLUMN ── */}
               <div>
                 <span className="section-tag">About this journey</span>
                 <p className="t-body mt-5">{pkg.description}</p>
+
+                {/* Itinerary */}
                 {pkg.itinerary && pkg.itinerary.length > 0 && (
                   <div className="mt-12">
                     <h2 className="t-h4 mb-6">Day-by-day</h2>
@@ -266,8 +273,16 @@ export default function PackageClient() {
                     </div>
                   </div>
                 )}
-              </div>
 
+                {/* ── REVIEWS — inside left column, after itinerary ── */}
+                <PackageReviews
+                  packageId={params.id as string}
+                  packageTitle={pkg.title}
+                />
+
+              </div>{/* end left column */}
+
+              {/* ── RIGHT COLUMN: inquiry form ── */}
               <aside>
                 <div className="pkg-inquiry-card">
                   {submitted ? (
@@ -289,22 +304,22 @@ export default function PackageClient() {
                         <div className="field-group">
                           <label className="field-label" htmlFor="pkg-name">Name <span className="req">*</span></label>
                           <input id="pkg-name" type="text" className="field-input" placeholder="Your name" required
-                            value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                            value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
                         </div>
                         <div className="field-group">
                           <label className="field-label" htmlFor="pkg-email">Email <span className="req">*</span></label>
                           <input id="pkg-email" type="email" className="field-input" placeholder="you@email.com" required
-                            value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                            value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
                         </div>
                         <div className="field-group">
                           <label className="field-label" htmlFor="pkg-phone">Phone <span className="req">*</span></label>
                           <input id="pkg-phone" type="tel" className="field-input" placeholder="+44 7700 000000" required
-                            value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                            value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} />
                         </div>
                         <div className="field-group">
                           <label className="field-label" htmlFor="pkg-msg">Anything to add?</label>
                           <textarea id="pkg-msg" className="field-textarea" placeholder="Travel dates, group size, questions..."
-                            value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+                            value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
                         </div>
                         {error && <p className="field-error">{error}</p>}
                         <button type="submit" className="btn btn-primary btn-full btn-lg" disabled={submitting}>
@@ -315,12 +330,13 @@ export default function PackageClient() {
                   )}
                 </div>
               </aside>
+
             </div>
           </div>
         </section>
+
       </main>
       <footer className="layout-footer"><Footer /></footer>
-      <PackageReviews packageId={params.id as string} packageTitle={pkg.title} />
     </div>
   )
 }

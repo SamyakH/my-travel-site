@@ -5,10 +5,11 @@ import { usePathname, useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 
 const NAV = [
-  { href: '/admin/dashboard', label: 'Dashboard' },
-  { href: '/admin/leads',     label: 'Leads' },
-  { href: '/admin/reviews',   label: 'Reviews' },
-  { href: '/admin/packages',  label: 'Packages' },
+  { href: '/admin/dashboard',   label: 'Dashboard' },
+  { href: '/admin/leads',       label: 'Leads' },
+  { href: '/admin/reviews',     label: 'Reviews' },
+  { href: '/admin/packages',    label: 'Packages' },
+  { href: '/admin/categories',  label: 'Categories' },
 ]
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {

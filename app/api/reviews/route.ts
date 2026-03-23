@@ -17,15 +17,14 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const body = await req.json()
-
-  const { client_name, destination, rating, comment } = body
+  const { client_name, destination, rating, comment, package_id } = body
 
   if (!client_name || !comment || !rating) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
   }
 
   if (comment.length < 20) {
-    return NextResponse.json({ error: 'Review too short' }, { status: 400 })
+    return NextResponse.json({ error: 'Review too short — please write at least 20 characters' }, { status: 400 })
   }
 
   if (rating < 1 || rating > 5) {
@@ -37,12 +36,10 @@ export async function POST(req: Request) {
     destination: destination || null,
     rating,
     comment,
+    package_id: package_id || null,
     is_approved: false,
   })
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ ok: true })
 }
