@@ -232,7 +232,7 @@ export default function HomePage() {
           <div className="container">
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1.4fr', gap:'clamp(var(--sp-12),8vw,var(--sp-24))', alignItems:'center' }}>
               <div>
-                <span className="section-tag">Why Sam J</span>
+                <span className="section-tag">Why RDK Tours</span>
                 <h2 className="t-h2" id="why-heading" style={{ marginTop:'var(--sp-4)' }}>
                   What makes this{' '}
                   <em style={{ fontStyle:'italic', color:'var(--clay)' }}>different</em>

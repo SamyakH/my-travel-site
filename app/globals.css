@@ -1,34 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════════
-   SAM J — BOUTIQUE TRAVEL
-   globals.css  |  SINGLE INTEGRATED DESIGN SYSTEM
-   Every visual rule for the entire site lives here.
-   No other CSS files. No exceptions.
-   ═══════════════════════════════════════════════════════════════════
-   01  Fonts
-   02  Design Tokens
-   03  Reset & Base
-   04  Typography Scale
-   05  Page Layout Shell
-   06  Container & Grid
-   07  Navigation
-   08  Buttons
-   09  Form Fields
-   10  Section Anatomy
-   11  Cards (generic)
-   12  Badges & Pills
-   13  Hero
-   14  Stats Strip
-   15  Package Components
-   16  Review Components
-   17  Service Components
-   18  Contact Layout
-   19  Footer
-   20  Utility Classes
-   21  Loading & Skeleton
-   22  Animations & Keyframes
-   23  Responsive Overrides
-   ═══════════════════════════════════════════════════════════════════ */
-
 
 /* ── 01 FONTS ───────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
@@ -2207,3 +2176,4 @@ input, textarea, select { font-family: var(--font-body); }
   align-items: center;
   gap: var(--sp-2);
 }
+

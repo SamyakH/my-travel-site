@@ -44,7 +44,7 @@ useEffect(() => {
         <div className="nav-inner">
 
           {/* Logo */}
-          <Link href="/" className="nav-logo" aria-label="Sam J Travel home">
+          <Link href="/" className="nav-logo" aria-label="RDK Travel Home">
             <span className="nav-logo-mark" aria-hidden="true">
               {/* Compass rose */}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">

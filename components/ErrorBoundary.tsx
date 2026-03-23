@@ -30,7 +30,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     
     // Log error to console in development
     if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundary caught an error:', error, errorInfo)
+      // Error logging removed for production
     }
   }
 
@@ -60,7 +60,7 @@ const DefaultErrorFallback: React.FC<{ error: Error; reset: () => void }> = ({
   <div className="error-boundary-fallback">
     <div className="error-content">
       <h2>Something went wrong</h2>
-      <p>We're sorry, but something unexpected happened.</p>
+          <p>We're sorry, but something unexpected happened.</p>
       
       {process.env.NODE_ENV === 'development' && (
         <details className="error-details">

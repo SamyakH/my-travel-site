@@ -1,6 +1,6 @@
-export const YOUR_NAME          = 'Kanika Gupta'
+export const YOUR_NAME          = 'Kanika Singh '
 export const YOUR_TITLE         = 'RDK Tour'
-export const AGENT_NAME         = 'Kanika Gupta'
+export const AGENT_NAME         = 'Kanika Singh'
 export const AGENT_TITLE        = YOUR_TITLE
 
 export const YOUR_TAGLINE       = 'I plan  trips across  Asia and  for independent travelers.'
