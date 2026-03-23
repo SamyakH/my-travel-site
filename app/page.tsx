@@ -32,7 +32,7 @@ const FEATURED = [
     title: 'Royal Rajasthan',
     region: 'India',
     nights: '10 nights',
-    from: '2,800',
+    from: '₹2,80,000',
     category: 'Cultural',
     img: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&h=1200&fit=crop',
   },
@@ -40,7 +40,7 @@ const FEATURED = [
     title: 'Bali Off the Beaten Track',
     region: 'Indonesia',
     nights: '12 nights',
-    from: '1,900',
+    from: '₹1,90,000',
     category: 'Adventure',
     img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&h=1200&fit=crop',
   },
@@ -48,7 +48,7 @@ const FEATURED = [
     title: 'Morocco Immersion',
     region: 'Morocco',
     nights: '10 nights',
-    from: '2,400',
+    from: '₹2,40,000',
     category: 'Cultural',
     img: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=900&h=1200&fit=crop',
   },
@@ -214,7 +214,7 @@ export default function HomePage() {
                     <div className="pkg-card-footer">
                       <div>
                         <div className="pkg-price-label">from</div>
-                        <div className="pkg-price">${item.from}</div>
+                        <div className="pkg-price">{item.from}</div>
                       </div>
                       <Link href="/packages" className="btn btn-ghost btn-sm">View</Link>
                     </div>
