@@ -60,7 +60,7 @@ export default function AboutPage() {
               <div className="card" style={{ borderRadius: 'var(--r-xl)', overflow: 'hidden' }}>
                 <div style={{ position: 'relative', paddingTop: '125%' }}>
                   <Image
-                    src="E:\Workings\WebSites\Agent Website\my-travel-site\app\Image\Icon.jpeg"
+                    src="/Image/Icon.jpeg"
                     alt={`${YOUR_NAME} — ${YOUR_TITLE}`}
                     fill
                     quality={85}
