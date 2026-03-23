@@ -170,7 +170,7 @@ export default function Packages() {
 
             <div className="admin-form-row">
               <div className="form-group">
-                <label>Price (USD) *</label>
+                <label>Price () *</label>
                 <input
                   type="number"
                   value={form.price}
