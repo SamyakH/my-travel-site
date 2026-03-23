@@ -104,6 +104,129 @@ export function validateUrl(url: string): boolean {
 }
 
 /**
+ * Contact form validation
+ * @param data - Contact form data to validate
+ * @returns object with validation result and errors
+ */
+export function validateContactForm(data: {
+  name: string
+  email: string
+  phone: string
+  destination: string
+  timing: string
+  message?: string
+}): { isValid: boolean; errors: Record<string, string> } {
+  const errors: Record<string, string> = {}
+
+  // Validate name
+  if (!data.name || !validateName(data.name)) {
+    errors.name = 'Please enter a valid name (minimum 2 characters)'
+  }
+
+  // Validate email
+  if (!data.email || !validateEmail(data.email)) {
+    errors.email = 'Please enter a valid email address'
+  }
+
+  // Validate phone
+  if (!data.phone || !validatePhone(data.phone)) {
+    errors.phone = 'Please enter a valid phone number'
+  }
+
+  // Validate destination
+  if (!data.destination || data.destination.trim().length < 2) {
+    errors.destination = 'Please enter a valid destination'
+  }
+
+  // Validate timing
+  if (!data.timing || data.timing.trim().length < 2) {
+    errors.timing = 'Please specify your preferred timing'
+  }
+
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors
+  }
+}
+
+/**
+ * Lead form validation
+ * @param data - Lead form data to validate
+ * @returns object with validation result and errors
+ */
+export function validateLeadForm(data: {
+  name: string
+  email: string
+  phone: string
+  message?: string
+  package_id?: string
+  package_title?: string
+  source: string
+}): { isValid: boolean; errors: Record<string, string> } {
+  const errors: Record<string, string> = {}
+
+  // Validate name
+  if (!data.name || !validateName(data.name)) {
+    errors.name = 'Please enter a valid name (minimum 2 characters)'
+  }
+
+  // Validate email
+  if (!data.email || !validateEmail(data.email)) {
+    errors.email = 'Please enter a valid email address'
+  }
+
+  // Validate phone
+  if (!data.phone || !validatePhone(data.phone)) {
+    errors.phone = 'Please enter a valid phone number'
+  }
+
+  // Validate source
+  if (!data.source || data.source.trim().length < 2) {
+    errors.source = 'Please specify how you found us'
+  }
+
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors
+  }
+}
+
+/**
+ * Review form validation
+ * @param data - Review form data to validate
+ * @returns object with validation result and errors
+ */
+export function validateReviewForm(data: {
+  client_name: string
+  destination?: string
+  rating: number
+  comment: string
+  package_id?: string
+}): { isValid: boolean; errors: Record<string, string> } {
+  const errors: Record<string, string> = {}
+
+  // Validate client name
+  if (!data.client_name || !validateName(data.client_name)) {
+    errors.client_name = 'Please enter a valid name (minimum 2 characters)'
+  }
+
+  // Validate rating
+  if (!data.rating || data.rating < 1 || data.rating > 5) {
+    errors.rating = 'Please select a rating between 1 and 5'
+  }
+
+  // Validate comment
+  if (!data.comment || data.comment.trim().length < 10) {
+    errors.comment = 'Please provide a detailed review (minimum 10 characters)'
+  }
+
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors
+  }
+}
+
+/**
  * Generic form validation helper
  */
 export const formValidators = {
