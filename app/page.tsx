@@ -62,8 +62,8 @@ const WHY = [
         <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
       </svg>
     ),
-    title: 'One person, not a call centre',
-    body: "You deal with me from first message to last day. No handoffs, no confusion.",
+    title: 'Personal service, not a call centre',
+    body: "You work directly with our team from first message to last day. No handoffs, no confusion.",
   },
   {
     icon: (
@@ -72,9 +72,8 @@ const WHY = [
         <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
       </svg>
     ),
-    title: 'Places I actually know',
-    // FIXED
-body: "Rajasthan, Bali, and Morocco are not destinations I research — they're places I know in detail.",
+    title: 'Places we actually know',
+    body: "Rajasthan, Bali, and Morocco are not destinations we research — they're places we know in detail.",
   },
   {
     icon: (
@@ -93,7 +92,7 @@ body: "Rajasthan, Bali, and Morocco are not destinations I research — they're 
       </svg>
     ),
     title: "Support while you're away",
-    body: "I'm reachable on WhatsApp throughout your trip. If something changes, we fix it.",
+    body: "We're reachable on WhatsApp throughout your trip. If something changes, we fix it.",
   },
 ]
 
@@ -238,10 +237,10 @@ export default function HomePage() {
                   <em style={{ fontStyle:'italic', color:'var(--clay)' }}>different</em>
                 </h2>
                 <p className="t-lead mt-5">
-                  I'm not an agency. I'm one person who plans trips in places they know well — and says no when they don't.
+                  We're not an agency. We're a dedicated team who plans trips in places we know well — and we're honest when we don't.
                 </p>
                 <Link href="/about" className="btn btn-outline mt-8">
-                  More about me
+                  More about us
                 </Link>
               </div>
 
@@ -267,7 +266,7 @@ export default function HomePage() {
           <div className="container-sm">
             <div className="pull-quote">
               <p className="pull-quote-text">
-                "Kaniaka found us a Trip in Fez that didn't appear on any booking site. We had a private terrace and a host who cooked dinner. It's been two years and we're still talking about it."
+                "RDK found us a Trip in Fez that didn't appear on any booking site. We had a private terrace and a host who cooked dinner. It's been two years and we're still talking about it."
               </p>
               <div style={{ marginTop:'var(--sp-5)', display:'flex', alignItems:'center', gap:'var(--sp-3)' }}>
                 <div style={{ width:'2rem', height:'2px', background:'var(--clay)', borderRadius:'var(--r-pill)' }} />
@@ -291,10 +290,10 @@ export default function HomePage() {
 
             <div className="grid-4">
               {[
-                { n:'01', title:'Tell me the dream', body:'A quick message is enough. Destination, rough dates, and what kind of trip you want.' },
-                { n:'02', title:'I build a proposal', body:'Within 48 hours you get a tailored itinerary — real hotels, pacing, and honest notes.' },
-                { n:'03', title:'We refine it', body:'We go back and forth until every detail is right. Nothing is confirmed until you are.' },
-                { n:'04', title:'Travel, supported', body:"All logistics handled. I'm on WhatsApp throughout if anything changes." },
+                { n:'01', title:'Tell us your dream', body:'A quick message is enough. Destination, rough dates, and what kind of trip you want.' },
+                { n:'02', title:'We build a proposal', body:'Within 48 hours you get a tailored itinerary — real hotels, pacing, and honest notes.' },
+                { n:'03', title:'We refine it together', body:'We go back and forth until every detail is right. Nothing is confirmed until you are.' },
+                { n:'04', title:'Travel, supported', body:"All logistics handled. We're on WhatsApp throughout if anything changes." },
               ].map((step) => (
                 <div key={step.n} className="step-card">
                   <div className="step-num">{step.n}</div>
@@ -318,10 +317,10 @@ export default function HomePage() {
                     Ready?
                   </span>
                   <h2 className="t-h2 mt-4" style={{ color:'var(--white)' }}>
-                    Tell me where you want to go.
+                    Tell us where you want to go.
                   </h2>
                   <p className="t-lead mt-5" style={{ color:'rgba(255,255,255,0.65)', maxWidth:'44ch' }}>
-                    No commitment required. Just a conversation about your trip.
+                     Just a conversation about your trip.
                   </p>
                 </div>
                 <div className="flex-col gap-3" style={{ flexShrink:0 }}>

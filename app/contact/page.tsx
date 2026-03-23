@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 import { useEffect, useState } from 'react'
 import Navbar from '@/components/Navbar'
@@ -102,7 +103,7 @@ export default function ContactPage() {
               <em style={{ fontStyle: 'italic', color: 'var(--clay)' }}>your trip</em>
             </h1>
             <p className="t-lead mt-5" style={{ maxWidth: '48ch' }}>
-              No commitment, no pressure. Tell me what you have in mind and I'll tell you what's possible.
+              Tell us what you have in mind and we'll tell you what's possible.
             </p>
           </div>
         </div>
@@ -118,7 +119,7 @@ export default function ContactPage() {
                   {YOUR_NAME}
                 </h2>
                 <p className="t-body mt-3" style={{ maxWidth: '38ch' }}>
-                  I reply to every message personally. If I can't help, I'll say so — and suggest someone who can.
+                  We reply to every message personally. If we can't help, we'll say so — and suggest someone who can.
                 </p>
 
                 <div className="form-stack mt-8">

@@ -223,7 +223,7 @@ export default function PackageClient() {
                 <div style={{ width: 1, background: 'rgba(255,255,255,0.2)', alignSelf: 'stretch' }} />
                 <div>
                   <div className="t-label" style={{ color: 'rgba(255,255,255,0.55)' }}>From</div>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', color: 'var(--white)', fontWeight: 500 }}>${pkg.price.toLocaleString()}</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', color: 'var(--white)', fontWeight: 500 }}>₹{pkg.price.toLocaleString()}</div>
                 </div>
               </div>
             </div>

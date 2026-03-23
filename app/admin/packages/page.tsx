@@ -270,7 +270,7 @@ export default function Packages() {
                   <div>
                     <strong>{pkg.title}</strong>
                     <span className="admin-package-meta">
-                      {pkg.duration} · ${pkg.price.toLocaleString()} · {pkg.category}
+                      {pkg.duration} · ₹{pkg.price.toLocaleString()} · {pkg.category}
                     </span>
                     <p className="admin-package-tagline">{pkg.tagline}</p>
                   </div>

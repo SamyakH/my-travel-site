@@ -51,10 +51,10 @@ function SubmitForm() {
         <div className="submit-success">
           <div className="submit-success-icon">✓</div>
           <h1>Thank you!</h1>
-          <p>
-            Your review has been submitted and will appear once approved.
-            I really appreciate you taking the time.
-          </p>
+      <p>
+        Travelled with us? We'd love to hear how it went. Your review
+        helps other travellers decide.
+      </p>
           <Link href="/" className="btn btn-primary btn-md">
             Back to home
           </Link>
@@ -73,7 +73,7 @@ function SubmitForm() {
 
       <h1>Leave a review</h1>
       <p>
-        Travelled with me? I&apos;d love to hear how it went. Your review
+        Travelled with me? I'd love to hear how it went. Your review
         helps other travellers decide.
       </p>
 

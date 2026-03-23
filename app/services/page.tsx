@@ -78,10 +78,10 @@ const SERVICES = [
 ]
 
 const NOT_INCLUDED = [
-  "I don't book flights directly — I advise on routing, timing, and what to avoid.",
-  "I don't work with ultra-luxury resorts over £600/night as standard.",
-  "I'm honest when a destination is outside my expertise — and I'll say so.",
-  "I take a small number of trips per year to keep quality high. I may not always have availability.",
+  "We don't book flights directly — we advise on routing, timing, and what to avoid.",
+  "We don't work with ultra-luxury resorts over £600/night as standard.",
+  "We're honest when a destination is outside our expertise — and we'll say so.",
+  "We take a small number of trips per year to keep quality high. We may not always have availability.",
 ]
 
 export default function ServicesPage() {
@@ -94,13 +94,13 @@ export default function ServicesPage() {
         {/* ── HERO ── */}
         <div className="hero-cream">
           <div className="container">
-            <span className="section-tag">What I do</span>
+            <span className="section-tag">What we do</span>
             <h1 className="t-h1 mt-4" style={{ maxWidth: '16ch' }}>
               Services built around{' '}
               <em style={{ fontStyle: 'italic', color: 'var(--clay)' }}>your trip</em>
             </h1>
             <p className="t-lead mt-5" style={{ maxWidth: '50ch' }}>
-              Everything I offer is designed to make your trip genuinely better — not just booked faster.
+              Everything we offer is designed to make your trip genuinely better — not just booked faster.
             </p>
           </div>
         </div>

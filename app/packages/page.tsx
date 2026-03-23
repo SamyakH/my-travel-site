@@ -68,7 +68,7 @@ export default function PackagesPage() {
               </em>
             </h1>
             <p className="t-lead mt-5" style={{ maxWidth: '48ch' }}>
-              Every package here is somewhere I know well. No filler destinations,
+              Every package here is somewhere we know well. No filler destinations,
               no copy-paste itineraries.
             </p>
           </div>
@@ -137,7 +137,7 @@ export default function PackagesPage() {
                       <div className="pkg-card-footer">
                         <div>
                           <div className="pkg-price-label">From</div>
-                          <div className="pkg-price">${pkg.price.toLocaleString()}</div>
+                          <div className="pkg-price">₹{pkg.price.toLocaleString()}</div>
                         </div>
                         <Link
                           href={`/packages/${pkg.id}`}

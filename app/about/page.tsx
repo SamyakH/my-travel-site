@@ -40,13 +40,13 @@ export default function AboutPage() {
         {/* ── HERO ── */}
         <div className="hero-cream">
           <div className="container">
-            <span className="section-tag">About me</span>
+            <span className="section-tag">About us</span>
             <h1 className="t-h1 mt-4" style={{ maxWidth: '14ch' }}>
-              One person.<br />
-              <em style={{ fontStyle: 'italic', color: 'var(--clay)' }}>Places I know.</em>
+              A dedicated team.<br />
+              <em style={{ fontStyle: 'italic', color: 'var(--clay)' }}>Places we know.</em>
             </h1>
             <p className="t-lead mt-5" style={{ maxWidth: '52ch' }}>
-              I'm {YOUR_NAME} — a {YOUR_TITLE.toLowerCase()} based in London, working independently with a small group of clients each year.
+              We're {YOUR_NAME} — a {YOUR_TITLE.toLowerCase()} based in India, working independently with a small group of clients each year.
             </p>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function AboutPage() {
               <div className="card" style={{ borderRadius: 'var(--r-xl)', overflow: 'hidden' }}>
                 <div style={{ position: 'relative', paddingTop: '125%' }}>
                   <Image
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop&crop=faces"
+                    src="E:\Workings\WebSites\Agent Website\my-travel-site\app\Image\Icon.jpeg"
                     alt={`${YOUR_NAME} — ${YOUR_TITLE}`}
                     fill
                     quality={85}
@@ -91,7 +91,7 @@ export default function AboutPage() {
 
               {/* Bio text */}
               <div>
-                <span className="section-tag">My story</span>
+                <span className="section-tag">Our story</span>
                 <div className="prose mt-5">
                   {YOUR_BIO_LONG.split('\n\n').map((para, i) => (
                     <p key={i} className="t-body" style={{ marginTop: i > 0 ? 'var(--sp-5)' : 0 }}>
@@ -102,7 +102,7 @@ export default function AboutPage() {
 
                 <div className="flex-row gap-3 mt-10">
                   <Link href="/contact" className="btn btn-primary btn-md">Plan my trip</Link>
-                  <Link href="/services" className="btn btn-outline btn-md">What I offer</Link>
+                  <Link href="/services" className="btn btn-outline btn-md">What we offer</Link>
                 </div>
               </div>
             </div>
