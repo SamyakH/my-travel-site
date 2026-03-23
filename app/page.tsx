@@ -117,6 +117,7 @@ export default function HomePage() {
               sizes="100vw"
               quality={88}
               style={{ objectFit: 'cover' }}
+              loading="eager"
             />
           </div>
           <div className="hero-overlay" />
@@ -199,6 +200,7 @@ export default function HomePage() {
                       sizes="(max-width:639px) 100vw, (max-width:1023px) 50vw, 33vw"
                       quality={82}
                       style={{ objectFit:'cover' }}
+                      loading="lazy"
                     />
                     <div className="pkg-card-badges">
                       <span className="badge badge-white">{item.category}</span>
@@ -265,12 +267,12 @@ export default function HomePage() {
           <div className="container-sm">
             <div className="pull-quote">
               <p className="pull-quote-text">
-                "Sam found us a Trip in Fez that didn't appear on any booking site. We had a private terrace and a host who cooked dinner. It's been two years and we're still talking about it."
+                "Kaniaka found us a Trip in Fez that didn't appear on any booking site. We had a private terrace and a host who cooked dinner. It's been two years and we're still talking about it."
               </p>
               <div style={{ marginTop:'var(--sp-5)', display:'flex', alignItems:'center', gap:'var(--sp-3)' }}>
                 <div style={{ width:'2rem', height:'2px', background:'var(--clay)', borderRadius:'var(--r-pill)' }} />
                 <span style={{ fontSize:'var(--text-sm)', fontWeight:600, color:'var(--ink-2)' }}>
-                  Rachel T. — Morocco, 2023
+                  Ria. — Delhi, 2023
                 </span>
               </div>
             </div>
