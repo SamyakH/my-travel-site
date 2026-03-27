@@ -29,8 +29,8 @@ export const COPYRIGHT_YEAR     = 2025
 export const SPECIALISMS        = ['Rajasthan', 'Bali', 'Morocco']
 
 export const SOCIAL = {
-  instagram: 'https://instagram.com/samjtravel',
-  facebook:  'https://facebook.com/samjtravel',
+  instagram: 'https://instagram.com/',
+  facebook:  'https://facebook.com/',
 }
 
 export const NAV_LINKS = [

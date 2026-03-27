@@ -83,9 +83,10 @@ export default function Footer() {
             <span className="footer-copy">
               &copy; {COPYRIGHT_YEAR} {YOUR_NAME}. All rights reserved.
             </span>
-            <nav className="footer-legal">
+              <nav className="footer-legal">
               <Link href="/privacy">Privacy</Link>
               <Link href="/terms">Terms</Link>
+              <Link href="/cancellation-policy">Cancellation Policy</Link>
             </nav>
           </div>
         </div>

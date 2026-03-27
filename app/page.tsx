@@ -1,23 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
+'use client'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { createClient } from '@supabase/supabase-js'
 
-import type { Metadata } from 'next'
-import { AGENT_NAME, AGENT_TITLE, SITE_URL, SITE_NAME } from '@/lib/site'
-
-export const metadata: Metadata = {
-  title: `${AGENT_NAME} — ${AGENT_TITLE}`,
-  description: `Personal travel planning for Rajasthan, Bali and Morocco. Deep local knowledge, no generic itineraries. Plan your trip with ${AGENT_NAME}.`,
-  openGraph: {
-    title: `${AGENT_NAME} — ${AGENT_TITLE}`,
-    description: `Personal travel planning for Rajasthan, Bali and Morocco.`,
-    url: SITE_URL,
-    siteName: SITE_NAME,
-    type: 'website',
-  },
-}
 import {
   YOUR_TAGLINE,
   YEARS_EXPERIENCE,
@@ -27,32 +16,20 @@ import {
   WHATSAPP_LINK,
 } from '@/lib/site'
 
-const FEATURED = [
-  {
-    title: 'Royal Rajasthan',
-    region: 'India',
-    nights: '10 nights',
-    from: '₹2,80,000',
-    category: 'Cultural',
-    img: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&h=1200&fit=crop',
-  },
-  {
-    title: 'Bali Off the Beaten Track',
-    region: 'Indonesia',
-    nights: '12 nights',
-    from: '₹1,90,000',
-    category: 'Adventure',
-    img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&h=1200&fit=crop',
-  },
-  {
-    title: 'Morocco Immersion',
-    region: 'Morocco',
-    nights: '10 nights',
-    from: '₹2,40,000',
-    category: 'Cultural',
-    img: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=900&h=1200&fit=crop',
-  },
-]
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
+interface Package {
+  id: string
+  title: string
+  tagline: string
+  price: number
+  duration: string
+  image_url: string
+  category: string
+}
 
 const WHY = [
   {
@@ -97,6 +74,26 @@ const WHY = [
 ]
 
 export default function HomePage() {
+  const [featuredPackages, setFeaturedPackages] = useState<Package[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Load packages from Supabase
+    supabase
+      .from('packages')
+      .select('id,title,tagline,price,duration,image_url,category')
+      .eq('is_active', true)
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          // Shuffle and pick 3 random packages
+          const shuffled = [...data].sort(() => 0.5 - Math.random())
+          setFeaturedPackages(shuffled.slice(0, 3))
+        }
+        setLoading(false)
+      })
+  }, [])
+
   return (
     <div className="page-wrap">
       <header className="layout-header">
@@ -188,41 +185,52 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid-3">
-              {FEATURED.map((item) => (
-                <article key={item.title} className="pkg-card card-hover">
-                  <div className="pkg-card-img">
-                    <Image
-                      src={item.img}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width:639px) 100vw, (max-width:1023px) 50vw, 33vw"
-                      quality={82}
-                      style={{ objectFit:'cover' }}
-                      loading="lazy"
-                    />
-                    <div className="pkg-card-badges">
-                      <span className="badge badge-white">{item.category}</span>
-                    </div>
-                  </div>
-                  <div className="pkg-card-body">
-                    <div className="pkg-card-meta">
-                      <span>{item.region}</span>
-                      <span>·</span>
-                      <span>{item.nights}</span>
-                    </div>
-                    <div className="pkg-card-title">{item.title}</div>
-                    <div className="pkg-card-footer">
-                      <div>
-                        <div className="pkg-price-label">from</div>
-                        <div className="pkg-price">{item.from}</div>
+            {loading ? (
+              <div className="flex-center" style={{ padding: 'var(--sp-16)' }}>
+                <div className="loading-spinner" />
+              </div>
+            ) : featuredPackages.length > 0 ? (
+              <div className="grid-3">
+                {featuredPackages.map((pkg) => (
+                  <article key={pkg.id} className="pkg-card card-hover">
+                    <div className="pkg-card-img">
+                      <Image
+                        src={pkg.image_url}
+                        alt={pkg.title}
+                        fill
+                        sizes="(max-width:639px) 100vw, (max-width:1023px) 50vw, 33vw"
+                        quality={82}
+                        style={{ objectFit:'cover' }}
+                        loading="lazy"
+                      />
+                      <div className="pkg-card-badges">
+                        <span className="badge badge-white">{pkg.category}</span>
                       </div>
-                      <Link href="/packages" className="btn btn-ghost btn-sm">View</Link>
                     </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+                    <div className="pkg-card-body">
+                      <div className="pkg-card-meta">
+                        <span>{pkg.duration}</span>
+                      </div>
+                      <div className="pkg-card-title">{pkg.title}</div>
+                      <div className="pkg-card-footer">
+                        <div>
+                          <div className="pkg-price-label">from</div>
+                          <div className="pkg-price">₹{pkg.price.toLocaleString()}</div>
+                        </div>
+                        <Link href={`/packages/${pkg.id}`} className="btn btn-ghost btn-sm">View</Link>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="card-flat text-center" style={{ padding: 'var(--sp-16)' }}>
+                <p className="t-lead">No packages available yet.</p>
+                <Link href="/packages" className="btn btn-outline btn-md mt-6">
+                  View all journeys
+                </Link>
+              </div>
+            )}
           </div>
         </section>
 
